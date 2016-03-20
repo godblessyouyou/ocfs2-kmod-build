@@ -1,0 +1,4 @@
+%defattr(644,root,root,755)
+/lib/modules/%2-%1
+/etc/depmod.d/ocfs2.conf
+/usr/share/doc/kmod-ocfs2/greylist.txt
