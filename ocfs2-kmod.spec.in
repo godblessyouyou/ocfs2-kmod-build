@@ -74,6 +74,8 @@ else
 	touch source/symbols.greylist
 fi
 
+echo %{kmod_name} > source/module-load.conf
+
 if [ -d source/firmware ]; then
 	make -C source/firmware
 fi
@@ -89,6 +91,7 @@ for flavor in %flavors_to_build ; do
 done
 
 install -m 644 -D source/depmod.conf $RPM_BUILD_ROOT/etc/depmod.d/%{kmod_name}.conf
+install -m 644 -D source/module-load.conf $RPM_BUILD_ROOT/etc/modules-load.d/%{kmod_name}.conf
 install -m 644 -D source/symbols.greylist $RPM_BUILD_ROOT/usr/share/doc/kmod-%{kmod_name}/greylist.txt
 
 if [ -d source/firmware ]; then
@@ -99,5 +102,8 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Tue May 31 2016 Zhao Zhenlong <zhaozhl@inspur.com> 1.5.0 2
+- auto load ocfs2 modules when booting
+
 * Sun Mar 20 2016 Zhao Zhenlong <zhaozhl@inspur.com> 1.5.0 1
 - ocfs2 source from stable-kernel 3.10.101
